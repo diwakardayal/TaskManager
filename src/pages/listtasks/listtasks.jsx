@@ -19,20 +19,6 @@ const ListTask = () => {
     { field: "due_date", headerName: "dueDate", width: 180 },
     { field: "message", headerName: "message", width: 150 },
     { field: "priority", headerName: "priority", width: 130 },
-    {
-      field: "Delete",
-      headerName: "Delete Task",
-      width: 300,
-      renderCell: (params) => {
-        return (
-          <>
-            <div className="">
-              <button onClick={() => setPopup(true)}>Delete</button>
-            </div>
-          </>
-        );
-      },
-    },
   ];
 
   useEffect(() => {
@@ -89,7 +75,7 @@ const ListTask = () => {
 
           <div style={{ display: "flex" }}>
             <div className="createtask">
-              <h1>NICEHEADING</h1>
+              <h1>Task Manager : List Tasks</h1>
 
               <div className="createTask"></div>
 

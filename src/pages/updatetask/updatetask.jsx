@@ -6,26 +6,33 @@ import { ListUserApi, ListTaskApi } from "../../services/api";
 import DatePicker from "react-multi-date-picker";
 import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import CreateUpdateTask from "../../components/createUpdateTask/CreateUpdateTask";
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
+
+export const popUp = () => {};
 
 const UpdateTask = () => {
   const [tabledata, setTableData] = useState([]);
   const [nuser, setNuser] = useState();
   const [popup, setPopup] = useState(false);
   const [currentId, setCurrentId] = useState();
+  console.log(popup);
 
   function buttonfn(id) {}
-  console.log(currentId.id);
+  console.log(currentId?.id);
+
+  function deletefn() {}
 
   const columns = [
-    // { field: "id", headerName: "ID", width: 70 },
+    { field: "id", headerName: "ID", width: 70 },
     { field: "userNo", headerName: "userNo", width: 100 },
     { field: "Username", headerName: "Name", width: 100 },
     { field: "created_on", headerName: "CreatedOn", width: 180 },
     { field: "due_date", headerName: "dueDate", width: 180 },
-    { field: "message", headerName: "message", width: 150 },
+    { field: "message", headerName: "message", width: 250 },
     { field: "priority", headerName: "priority", width: 130 },
     {
-      field: "id",
+      field: "update",
       headerName: "Update Task",
       width: 300,
       renderCell: (id) => {
@@ -34,8 +41,8 @@ const UpdateTask = () => {
             <div className="">
               <button
                 onClick={() => {
-                  setCurrentId(id);
                   setPopup(true);
+                  setCurrentId(id);
                 }}
               >
                 Update
@@ -59,6 +66,7 @@ const UpdateTask = () => {
             due_date,
             message,
             priority,
+            id: update,
           } = item;
           return {
             id,
@@ -68,6 +76,7 @@ const UpdateTask = () => {
             due_date,
             message,
             priority,
+            update,
           };
         });
         console.log(data);
@@ -97,9 +106,9 @@ const UpdateTask = () => {
         <Sidebar />
 
         <div style={{ display: "flex", zIndex: "9" }}>
-          {popup && <CreateUpdateTask state={setPopup} />}
+          {popup && <CreateUpdateTask state={setPopup} ID={currentId?.id} />}
           <div className="createtask">
-            <h1>NICEHEADING</h1>
+            <h1>Task Manager : Update Task</h1>
 
             <div className="createTask"></div>
             <div style={{ height: 600, width: 1000 }} className="tasklist">

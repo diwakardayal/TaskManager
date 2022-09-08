@@ -12,16 +12,40 @@ const DeleteTask = () => {
   const [tabledata, setTableData] = useState([]);
   const [nuser, setNuser] = useState();
   const [popup, setPopup] = useState(false);
+  const [taskId, setTaskId] = useState();
 
-  function spinnerfn() {
+  console.log(taskId?.id);
+
+  //delete function
+  async function deletefn() {
     setSpinner(true);
     setTimeout(() => {
       setSpinner(false);
+      console.log(taskId?.id);
     }, 1000);
 
-    setTimeout(() => {
-      alert("Entry deleted successfully");
-    }, 1000);
+    var myHeaders = new Headers();
+    myHeaders.append("AuthToken", "UrM4YHgb1FcqEf1tuKwmAMMX5MxFZ12a");
+    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+    var urlencoded = new URLSearchParams();
+    urlencoded.append("taskid", taskId.id);
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: urlencoded,
+      redirect: "follow",
+    };
+
+    fetch("https://devza.com/tests/tasks/delete", requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        console.log(result);
+        alert("Task Deleted!");
+        window.location.reload();
+      })
+      .catch((error) => console.log("error", error));
   }
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
@@ -35,11 +59,18 @@ const DeleteTask = () => {
       field: "Delete",
       headerName: "Delete Task",
       width: 300,
-      renderCell: (params) => {
+      renderCell: (id) => {
         return (
           <>
             <div className="">
-              <button onClick={spinnerfn}>Delete</button>
+              <button
+                onClick={() => {
+                  setTaskId(id);
+                  deletefn();
+                }}
+              >
+                Delete
+              </button>
             </div>
           </>
         );
@@ -59,7 +90,9 @@ const DeleteTask = () => {
             due_date,
             message,
             priority,
+            id: Delete,
           } = item;
+
           return {
             id,
             Username,
@@ -68,6 +101,7 @@ const DeleteTask = () => {
             due_date,
             message,
             priority,
+            Delete,
           };
         });
         console.log(data);
@@ -125,12 +159,20 @@ const DeleteTask = () => {
 
           <div style={{ display: "flex" }}>
             <div className="createtask">
-              <h1>NICEHEADING</h1>
+              <h1>Task Manager : Delete Task</h1>
 
               <div className="createTask"></div>
 
               <div style={{ height: 600, width: 1000 }} className="tasklist">
-                <h3>Task List</h3>
+                <h3>
+                  Task List -
+                  {taskId?.id
+                    ? `Task Id selected ${taskId.id}`
+                    : "No Task selected"}
+                </h3>
+                <span style={{ fontSize: ".9rem" }}>
+                  *Double Click required to delete the task
+                </span>
                 <DataGrid
                   rows={tabledata}
                   columns={columns}

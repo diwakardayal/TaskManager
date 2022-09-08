@@ -1,24 +1,32 @@
 .parent_center{
+
 z-index: 999;
   width: 800px;
   height: 200px;
   border-radius: 12px;
-  background-color: rgba(0, 0, 0, 0.164);
+  background-color: rgba(220, 220, 220, 0.815);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   display: flex;
   flex-direction: column;
   padding: 25px;
+ 
 }
 
 .super{
+   position: absolute;
    margin:auto;
    z-index: 999;
    width: 100%;
-   background-color: rgba(255, 255, 255, 0.249);
+   background-color: rgba(19, 19, 19, 0.864);
   height: 100%;
-   
-  
+    z-index: 999;
   display: flex;
   justify-content: center;
   align-items: center
+ 
+ 
+ }
+
+ .createtask_form{
+   color:white !important;
  }

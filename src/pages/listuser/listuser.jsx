@@ -52,15 +52,29 @@ const ListUser = () => {
   const columns = [
     { field: "id", headerName: "ID", width: 30 },
 
-    { field: "name", headerName: "Name", width: 230 },
+    { field: "name", headerName: "Name", width: 130 },
+    {
+      field: "picture",
+      headerName: "Profile Picture",
+      width: 540,
+      renderCell: (picture) => {
+        console.log(picture.value);
+        return (
+          <div>
+            <img src={picture.value} alt="" />
+            <p>Not valid image are here or else it would have been displayed</p>
+          </div>
+        );
+      },
+    },
   ];
 
   useEffect(() => {
     ListUserApi()
       .then((res) => {
         let data = res.data.users?.map((item) => {
-          const { id, name } = item;
-          return { id, name };
+          const { id, name, picture } = item;
+          return { id, name, picture };
         });
         setTableData(data);
       })
@@ -72,9 +86,9 @@ const ListUser = () => {
 
       <div style={{ display: "flex" }}>
         <div className="listuser">
-          <h1>NICEHEADING</h1>
+          <h1>Task Manager : List User</h1>
 
-          <div style={{ height: 600, width: 500 }}>
+          <div style={{ height: 600, width: 800 }}>
             <DataGrid
               rows={tabledata}
               columns={columns}

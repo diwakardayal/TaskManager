@@ -8,7 +8,6 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers";
 import { TextField } from "@mui/material";
 import moment from "moment/moment";
-import axios from "axios";
 
 const createUpdateTask = () => {
   return <></>;
@@ -128,19 +127,13 @@ const CreateTask = () => {
 
       <div style={{ display: "flex" }}>
         <div className="createtask">
-          <h1>NICEHEADING</h1>
+          <h1>Task Manager: Create Task </h1>
 
           <div className="createTask">
             <h3>Create Task</h3>
             <form className="createtask_form" onSubmit={createTask}>
               <input type="text" placeholder="Message..." id="message" />
 
-              {/* <DatePicker
-                value={value}
-                onChange={setValue}
-                format="MM/DD/YYYY HH:mm:ss"
-                plugins={[<TimePicker position="bottom" id="timepicker" />]}
-              /> */}
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DateTimePicker
                   disablePast="true"

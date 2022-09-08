@@ -1,5 +1,6 @@
 import react from "react";
 import axios from "axios";
+var qs = require("qs");
 
 const url = "https://devza.com/tests/tasks";
 const apiKey = "UrM4YHgb1FcqEf1tuKwmAMMX5MxFZ12a";
@@ -43,11 +44,15 @@ export const UpdateTaskApi = async (data) => {
     .catch((e) => console.log(e));
 };
 
-export const DeleteTaskApi = async (data) => {
+export const DeleteTaskApi = async (receivedData) => {
+  var data = qs.stringify({
+    receivedData,
+  });
   return axios
     .post(`${url}/delete`, data, {
       headers: {
         AuthToken: apiKey,
+        "Content-Type": "application/x-www-form-urlencoded",
       },
     })
     .then((res) => res)
