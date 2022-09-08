@@ -1,0 +1,7 @@
+.listuser{
+    position: sticky;
+    overflow: scroll;
+width: 100vw;  
+overflow-x: hidden; 
+margin-left: 1rem; 
+}

@@ -1,0 +1,21 @@
+.sidebar{
+   position: sticky;
+    top:0;
+    height:100vh;
+    
+    padding: 3rem;
+    background-color: rgba(128, 255, 0, 0.345);
+}
+
+ 
+ 
+
+.sidebar > ul {
+     
+  padding-left: 0;
+    list-style-type: none;
+    width: 5rem;
+
+}
+
+ 

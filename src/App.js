@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ListUser from "./pages/listuser/listuser";
+import CreateTask from "./pages/createtask/createtask";
+import DeleteTask from "./pages/deletetask/deletetask";
+import UpdateTask from "./pages/updatetask/updatetask";
+import ListTask from "./pages/listtasks/listtasks";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route exact path="/" element={<ListUser />} />
+        <Route path="/listuser" element={<ListUser />} />
+        <Route path="/CreateTask" element={<CreateTask />} />
+        <Route path="/UpdateTask" element={<UpdateTask />} />
+        <Route path="/DeleteTask" element={<DeleteTask />} />
+        <Route path="/ListTask" element={<ListTask />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
