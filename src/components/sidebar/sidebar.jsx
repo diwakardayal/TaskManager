@@ -42,9 +42,7 @@ const Sidebar = () => {
       </ul>
       <ul>
         <li>
-          <div>
-            <a href="#" List></a>
-          </div>
+          <div></div>
         </li>
       </ul>
     </div>

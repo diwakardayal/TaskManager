@@ -3,52 +3,15 @@ import Sidebar from "../../components/sidebar/sidebar";
 import "./listuser.css";
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 import { ListUserApi } from "../../services/api";
+import { useQueries, useQuery } from "react-query";
 
-const rows = [
-  { id: 1, lastName: "Snow", emailId: "Jon", phoneNo: "123123", age: 35 },
-  {
-    id: 2,
-    lastName: "Lannister",
-    emailId: "Cersei",
-    phoneNo: "123123",
-    age: 42,
-  },
-  {
-    id: 3,
-    lastName: "Lannister",
-    emailId: "Jaime",
-    phoneNo: "123123",
-    age: 45,
-  },
-  { id: 4, lastName: "Stark", emailId: "Arya", phoneNo: "123123", age: 16 },
-  {
-    id: 5,
-    lastName: "Targaryen",
-    emailId: "Daenerys",
-    phoneNo: "123123",
-    age: null,
-  },
-  { id: 6, lastName: "Melisandre", emailId: null, phoneNo: "123123", age: 150 },
-  {
-    id: 7,
-    lastName: "Clifford",
-    emailId: "Ferrara",
-    phoneNo: "123123",
-    age: 44,
-  },
-  {
-    id: 8,
-    lastName: "Frances",
-    emailId: "Rossini",
-    phoneNo: "123123",
-    age: 36,
-  },
-  { id: 9, lastName: "Roxie", emailId: "Harvey", phoneNo: "123123", age: 65 },
-];
+async function fetchData() {}
 
 const ListUser = () => {
   const [tabledata, setTableData] = useState([]);
-  console.log(tabledata);
+  const [input, setInput] = useState();
+  const [display, setDisplay] = useState(false);
+
   const columns = [
     { field: "id", headerName: "ID", width: 30 },
 
@@ -58,7 +21,6 @@ const ListUser = () => {
       headerName: "Profile Picture",
       width: 540,
       renderCell: (picture) => {
-        console.log(picture.value);
         return (
           <div>
             <img src={picture.value} alt="" />
@@ -80,11 +42,51 @@ const ListUser = () => {
       })
       .catch((e) => console.log(e));
   }, []);
+  console.log(input);
   return (
     <div style={{ display: "flex" }}>
       <Sidebar />
 
-      <div style={{ display: "flex" }}>
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <div
+          className="searchbar"
+          style={{ paddingTop: "1.2rem", paddingLeft: "2rem", zIndex: "999" }}
+        >
+          <input
+            type="text"
+            placeholder="search..."
+            onFocus={() => {
+              setTimeout(() => {
+                setDisplay(false);
+              }, 2500);
+              setDisplay(true);
+            }}
+            onChange={(e) => {
+              setInput(e.target.value);
+              if (e.target === document.activeElement) {
+                setDisplay(true);
+              } else {
+                setDisplay(false);
+              }
+            }}
+          />
+
+          <div style={{ marginTop: "", width: "10rem" }}>
+            {display ? (
+              <div style={{ padding: "1px 2px", backgroundColor: "white" }}>
+                {tabledata
+                  .filter((item) => {
+                    return item.name.toLowerCase().includes(input);
+                  })
+                  .map((data) => {
+                    return <div>{data.name}</div>;
+                  })}
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
+        </div>
         <div className="listuser">
           <h1>Task Manager : List User</h1>
 

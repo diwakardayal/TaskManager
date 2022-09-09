@@ -5,3 +5,9 @@ width: 100vw;
 overflow-x: hidden; 
 margin-left: 1rem; 
 }
+
+.searchbar{
+    width: 100vw;
+  height: 5rem;
+    background-color: blue;
+}
